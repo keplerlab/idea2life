@@ -51,14 +51,14 @@ docker-compose down
 
 ### Install from source
 
-Please refer to this guide : [Install and use idea2Life from source (without docker)](https://keplervaani.com/idea2life/developer_guides/install_idea2life_without_docker.html)
+Please refer to this guide : [Install and use idea2Life from source (without docker)]( https://idea2life.readthedocs.io/en/latest/developer_guides/install_idea2life_without_docker.html )
 
 
 
 ## How to use Library
 
 Refer to Getting started section in idea2life Reference 
-   from https://keplervaani.com/idea2life/getting_started.html#how-to-use-idea2life
+   from [getting_started#how-to-use-idea2life]( https://idea2life.readthedocs.io/en/latest/getting_started.html#how-to-use-idea2life )
 
 ## Attributions
 1) We have used **darknet** Yolo framework for training and detection of template. https://pjreddie.com/darknet/yolo/
