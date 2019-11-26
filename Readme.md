@@ -3,7 +3,7 @@
 # **Idea2Life**: Tool for fast webapps prototyping
 
 ## Resources 
-* Homepage and Reference: https://keplervaani.com/idea2life
+* Homepage and Reference: https://idea2life.readthedocs.io/
 
 ## Description
 Prototyping a web application is more about ideas than mere sketching wireframes. The biggest barrier to effective prototyping is time and cost. idea2Life is an AI powered rapid prototyping to lower the barrier of prototyping.

@@ -28,4 +28,4 @@ idea2Life Supported components
 #. 'Social'
 
 You can find images for each components in this file Download link:
-[idea2life_templates_for_print]( https://lion.app.box.com/file/544660487330 )
+[idea2life_templates_for_print]( https://drive.google.com/file/d/1MIeZj1EItCZbk7e1qTOrv3GTdOBdYXXB/view?usp=sharing )
