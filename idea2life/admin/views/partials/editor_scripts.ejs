@@ -1,0 +1,131 @@
+
+<script src="/adminassets/js/popper/popper.min.js"></script>
+<script src='/scripts/tinymce/tinymce.min.js'></script>
+<script src="/adminassets/js/jquery/jquery-3.4.1.min.js"></script>
+<script src="/adminassets/js/bootstrap/bootstrap.min.js"></script>
+
+<script>
+        
+    $(document).ready(function () {
+        // Handler for .ready() called.
+        $('html, body').animate({
+            scrollTop: $('#editorsection').offset().top
+        }, 'slow');
+    });
+    
+    function getPageList () {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", "/admin/pagenames", false ); // false for synchronous request
+        xmlHttp.send( null );
+
+        var pageArray = JSON.parse(xmlHttp.responseText);
+        var Link_list_array = [];
+        pageArray.forEach(element => {
+          Link_list_array.push({title: element, value: "/admin/pagehtmlview?page=" + element});
+          });
+
+        return Link_list_array;
+
+    }
+
+    tinymce.init({
+      selector: 'textarea#full-featured-non-premium',
+      plugins: 'print preview fullpage paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+      imagetools_cors_hosts: ['picsum.photos'],
+      menubar: 'file edit view insert format tools table help',
+      toolbar: 'link | save fullscreen  preview  print | undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | insertfile image media template anchor codesample | ltr rtl',
+      toolbar_sticky: true,
+      autosave_ask_before_unload: true,
+      autosave_interval: "30s",
+      autosave_prefix: "{path}{query}-{id}-",
+      autosave_restore_when_empty: false,
+      autosave_retention: "2m",
+      image_advtab: true,
+      content_css: [
+        '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+        '//www.tiny.cloud/css/codepen.min.css'
+      ],
+      file_picker_types: 'image',
+      link_list: getPageList(),
+      importcss_append: true,
+      height: 400,
+      file_picker_callback: function (cb, value, meta) {
+        var input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+
+        /*
+          Note: In modern browsers input[type="file"] is functional without
+          even adding it to the DOM, but that might not be the case in some older
+          or quirky browsers like IE, so you might want to add it to the DOM
+          just in case, and visually hide it. And do not forget do remove it
+          once you do not need it anymore.
+        */
+
+        input.onchange = function () {
+          var file = this.files[0];
+
+          var reader = new FileReader();
+          reader.onload = function () {
+            /*
+              Note: Now we need to register the blob in TinyMCEs image blob
+              registry. In the next release this part hopefully won't be
+              necessary, as we are looking to handle it internally.
+            */
+            var id = 'blobid' + (new Date()).getTime();
+            var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+            var base64 = reader.result.split(',')[1];
+            var blobInfo = blobCache.create(id, file, base64);
+            blobCache.add(blobInfo);
+
+            /* call the callback and populate the Title field with the file name */
+            cb(blobInfo.blobUri(), { title: file.name });
+          };
+          reader.readAsDataURL(file);
+        };
+
+        input.click();
+      },
+      templates: [
+            { title: 'New Table', description: 'creates a new table', content: '<div class="mceTmpl"><table width="98%%"  border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>' },
+        { title: 'Starting my story', description: 'A cure for writers block', content: 'Once upon a time...' },
+        { title: 'New list with dates', description: 'New List with dates', content: '<div class="mceTmpl"><span class="cdate">cdate</span><br /><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>' }
+      ],
+      template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
+      template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
+      height: 600,
+      image_caption: true,
+      quickbars_selection_toolbar: 'bold italic | h2 h3 blockquote quickimage quicktable',
+      noneditable_noneditable_class: "mceNonEditable",
+      toolbar_drawer: 'sliding',
+      contextmenu: "link image imagetools table",
+      
+      save_onsavecallback: function () {
+                                            //This MUST alert HTML content of editor.
+                                            // alert(" <%= fileName %> ");
+
+                                            var editedhtml = tinymce.activeEditor.getContent();
+
+                                            var data = {"data" : editedhtml};
+
+                                            var http = new XMLHttpRequest();
+                                            var url = 'savepage?page=' + '<%= fileName %>';
+
+                                            http.open('POST', url, true);
+
+                                            //Send the proper header information along with the request
+                                            http.setRequestHeader('Content-type', 'application/json');
+
+                                            http.onreadystatechange = function() {//Call a function when the state changes.
+                                                if(http.readyState == 4 && http.status == 200) {
+                                                    //alert(http.responseText);
+                                                }
+                                            }
+                                            http.send(JSON.stringify(data));
+
+                                       },
+     });
+
+    
+
+</script>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include partials/admin_head %>
+</head>
+<body>
+
+  <% include partials/header_component %>
+
+  <div class="container">
+    <div class="row">
+      <h2>Page List<h2>
+    </div>
+
+    <div class="card-body">
+                <div class="tab-content">
+                  <table id="pageview" class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Page Name</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       <% pagelist.forEach((page) => { %>
+                            <tr>
+                              <td><%= page %></td>
+                              <td>
+                                <a href="<%= pagefeatures.edit %>?page=<%= page %>" target="_blank">
+                                  Edit
+                                </a>
+                              </td>
+                              <td>
+                                <a href="<%= pagefeatures.pageview %>?page=<%= page %>" target="_blank">
+                                  View 
+                                </a>
+                              </td>
+                              <td>
+                                <a id="<%= page %>" class="pagerlink" href="#myModal" data-toggle="modal" >
+                                  Rename 
+                                </a>
+                              </td>
+                              <td>
+                                <a href="<%= pagefeatures.delete %>?page=<%= page %>" >
+                                  Delete 
+                                </a>
+                              </td>
+                            </tr>
+                        <% }) %>  
+                      
+                    </tbody>
+                  </table>
+                    
+                </div>
+
+                <div class="modal fade" id="myModal" role="dialog">
+                  <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Rename</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Old File Name: </p>
+                        <p id="oldname"></p>
+                      </div>
+                      <div class="modal-body">
+                          TO
+                        </div>
+                      <div class="modal-body">
+                          <p>New File Name: </p>
+                        <input type="text" id="newname">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick=login() >Ok</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    </div>
+  </div>
+</body>
+
+<% include ./partials/pagelist_scripts %>
+</html>

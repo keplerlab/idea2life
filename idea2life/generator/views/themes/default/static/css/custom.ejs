@@ -1,0 +1,93 @@
+<style>
+    @font-face {
+        font-family: FuturaNextW05-Book;
+        src: url("<%= base_path %>static/fonts/FuturaNext_Book.otf") format("opentype");
+    }
+
+    /* Material Icons start here */
+    @font-face {
+        font-family: 'Material Icons';
+        font-style: normal;
+        font-weight: 400;
+        src: url("<%= base_path %>static/fonts/iconfont/MaterialIcons-Regular.eot"); /* For IE6-8 */
+        src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url("<%= base_path %>static/fonts/iconfont/MaterialIcons-Regular.woff2") format('woff2'),
+            url("<%= base_path %>static/fonts/iconfont/MaterialIcons-Regular.woff") format('woff'),
+            url("<%= base_path %>static/ui/fonts/iconfont/MaterialIcons-Regular.ttf") format('truetype');
+        }
+
+        .material-icons {
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 34px;  /* Preferred icon size */
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+            color: white;
+            
+            /* Support for all WebKit browsers. */
+            -webkit-font-smoothing: antialiased;
+            /* Support for Safari and Chrome. */
+            text-rendering: optimizeLegibility;
+            
+            /* Support for Firefox. */
+            -moz-osx-font-smoothing: grayscale;
+            
+            /* Support for IE. */
+            font-feature-settings: 'liga';
+        }
+
+        /* Material Icons end here */
+
+    title{
+        margin: auto;
+    }
+
+    video {
+        width: 100%;
+    }
+
+    body {
+        background-color: #fe414d;
+        color:white;
+        font-family: "FuturaNextW05-Book","Helvetica","Arial",sans-serif;
+    }
+
+    .btn-icon{
+        margin-left: 7%;
+    }
+
+    .fa-star{
+        margin-left:2%;
+    }
+
+    .fa-facebook:active, .fa-facebook:hover, .fa-twitter:active, .fa-twitter:hover, .fa-linkedin:active, .fa-linkedin:hover {
+        color: #fe414d;
+        background-color: white;
+        text-decoration: none;
+    }
+
+    .fa-facebook, .fa-twitter, .fa-linkedin {
+        background: white;
+        color: #fe414d;
+        padding: 10px;
+        font-size: 30px;
+        width:50px;
+        text-align: center;
+        text-decoration: none;
+        margin: 1% 2%;
+        border-radius: 50%;
+    }
+
+
+    .btn-primary,.btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-outline-primary {
+        background-color: white !important;
+        color: black !important;
+}
+</style>

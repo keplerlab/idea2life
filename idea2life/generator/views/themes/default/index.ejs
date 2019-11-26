@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <title>idea2Life</title>
+
+        <% include main_css %>
+
+        <% include main_js %>
+    
+    </head>
+
+    <body>
+
+        <% if (add_modal) { %>
+            <% include modal %>
+        <% } %>
+
+        <% if (add_loader) { %>
+            <% include loader/index %>
+        <% } %>
+       
+
+        <div class="container">
+
+            <!-- this div is required to render the contents of the HTML in this-->
+            <div id="main">
+            </div>
+
+            <!-- adds component to click picture and controls with it-->
+            <% if (add_ui_control_component) { %>
+                <% include cam_component/index %>
+            <% } %>
+        </div>
+    </body>
+</html>

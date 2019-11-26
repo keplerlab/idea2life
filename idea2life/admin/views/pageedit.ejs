@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include partials/admin_head %>
+</head>
+<body>
+  <% include partials/header_component %>
+
+  <div id="editorsection" class="container" >
+      <div class="row">
+        <h2>Edit Page<h2>
+      </div>
+
+      <div class="card-body">
+          <form method="post">
+              <textarea id="full-featured-non-premium">
+                <%= content %>
+              </textarea>
+          </form>
+      </div>
+  </div>
+  <div class="space">
+  </div>
+
+  </body>
+  <% include ./partials/editor_scripts %>
+
+</html>

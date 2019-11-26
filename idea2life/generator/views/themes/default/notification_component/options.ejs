@@ -1,0 +1,31 @@
+<script>
+    var toastr_options = {
+        escapeHTML : true,
+        closeButton: true,
+        newestOnTop: false,
+
+        // <! -- These animations are availbale in jQuery by default (and can be used) -->
+        // showEasing = 'swing',
+        // hideEasing = 'linear',
+        // closeEasing = 'linear',
+
+        // don't show duplicate toast
+        preventDuplicates : true,
+
+        // set to 0 to prevent from auto-hiding
+        timeOut : 0, // How long the toast will display without user interaction
+        extendedTimeOut : 0, // How long the toast will display after a user hovers over it
+
+        progressBar : false, // Visually indicate how long before a toast expires
+
+        rtl : false // Flip the toastr to be displayed properly for right-to-left languages.
+
+
+        // <!-- Methods which can be overwritten -->
+        // onShown = function() { console.log('hello'); },
+        // onHidden = function() { console.log('goodbye'); },
+        // onclick = function() { console.log('clicked'); },
+        // onCloseClick = function() { console.log('close button clicked'); }
+
+    }
+</script>

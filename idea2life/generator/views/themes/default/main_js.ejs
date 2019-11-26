@@ -1,0 +1,15 @@
+<script src="<%= base_path %>static/js/jquery/jquery-3.3.1.min.js"></script>
+<script src="<%= base_path %>static/js/popper/popper.min.js"></script>
+<script src="<%= base_path %>static/js/bootstrap/bootstrap.min.js"></script>
+
+<% if (add_loader) { %>
+    <% include loader/index_js %>
+<% } %>
+
+<% if (add_notification_component) { %>
+    <% include notification_component/index_js %>
+<% } %>
+
+<% if (add_ui_control_component) { %>
+    <% include cam_component/cam_js %>
+<% } %>

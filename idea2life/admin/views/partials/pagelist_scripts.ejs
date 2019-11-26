@@ -1,0 +1,51 @@
+
+<script src="/adminassets/js/jquery/jquery-3.4.1.min.js"></script>
+<script src="/adminassets/js/bootstrap/bootstrap.min.js"></script>
+
+
+<script>
+
+  $('a.pagerlink').click(function() { 
+      var id = $(this).attr('id');
+      document.getElementById("oldname").innerHTML = id;
+  });
+  
+    //called when user clicks login
+    function login() {
+        $("#myModal").modal("hide");
+    }
+  
+    //called when the modal is closed, logs values grabbed from the modal in login()
+    $('#myModal').on('hidden.bs.modal', function() {
+        // console.log('filename : '+$("#newname").val());
+  
+        var newFileName = $("#newname").val();
+        var oldFileName = document.getElementById("oldname").innerHTML;
+  
+        if(newFileName != "" && oldFileName != ""){
+
+          var reqURL = "/ui/rename_page";
+          var xmlHttp = new XMLHttpRequest();
+          var data = {"oldname" : oldFileName, "newname" : newFileName};
+          xmlHttp.open('POST', reqURL, true);
+
+          //Send the proper header information along with the request
+          xmlHttp.setRequestHeader('Content-type', 'application/json');
+
+          xmlHttp.send(JSON.stringify(data));
+          
+          xmlHttp.onreadystatechange = function() {//Call a function when the state changes.
+              if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                // "status":false,"data":null,"category":"success","title":"UI Module:","msg":"Page has been saved as .."}
+                  
+                    var resp = xmlHttp.responseText;
+                    location.reload();
+              }
+          }
+        }
+        else {
+          alert("Enter valid FileName");
+        } 
+    })
+  
+  </script>

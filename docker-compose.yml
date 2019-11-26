@@ -1,0 +1,23 @@
+version: '3'
+services:
+  ai:
+    build: ./ai/
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./ai/server/static/images:/home/ai/server/static/images
+      - ./idea2life/:/home/idea2life/
+      - ./docs/:/home/docs/
+    environment:
+      FLASK_ENV: development
+
+  idea2life:
+    build: ./idea2life/
+    ports:
+      - "1813:1813"
+    volumes:
+      - ./idea2life/public:/usr/src/app/public
+      - ./idea2life/layout/data/:/usr/src/app/layout/data
+      - ./idea2life/userData/:/usr/src/app/userData
+    environment:
+      FLASK_ENV: development

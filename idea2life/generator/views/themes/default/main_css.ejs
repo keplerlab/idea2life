@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="<%= base_path %>static/css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="<%= base_path %>static/css/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="<%= base_path %>static/css/pretty-checkbox/pretty-checkbox.min.css">
+
+<% if (add_loader) { %>
+   <% include loader/index_css %>
+<% } %>
+
+
+<% if (add_notification_component) { %>
+    <% include notification_component/index_css %>
+<% } %>
+
+
+<% if (add_ui_control_component) { %>
+    <link rel="stylesheet" href="<%= base_path %>cam_component/css/custom/main.css">
+<% } %>
+
+<style>
+        @font-face {
+            font-family: FuturaNextW05-Book;
+            src: url("<%= base_path %>static/fonts/FuturaNext_Book.otf") format("opentype");
+        }
+    
+        title{
+            margin: auto;
+        }
+    
+        body {
+            background-color: #fe414d;
+            color:white;
+            font-family: "FuturaNextW05-Book","Helvetica","Arial",sans-serif;
+        }
+
+        video {
+            width: 100%;
+        }
+    
+        .btn-primary,.btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-outline-primary {
+            background-color: white !important;
+            color: black !important;
+    }
+    </style>

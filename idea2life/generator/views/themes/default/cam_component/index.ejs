@@ -1,0 +1,25 @@
+<div class="col-md-4 offset-md-8 " style="position:absolute;bottom:10px;right:10px;z-index:9999;">                    
+        <div class="row controls">
+
+            <a id="icon-snap"><i class="fa fa-camera fa-icon"></i></a>
+            <a class="icon" id="icon-load-camera"><i class="fa fa-play fa-icon"></i></a>
+            <a class="icon" id='icon-save'><i class="fa fa-floppy-o fa-icon" aria-hidden="true"></i></a>
+            <a class="icon" id="icon-hide-camera"><i class="fa fa-arrow-down fa-icon"></i></a>
+            <a class="icon" id="icon-show-camera"><i class="fa fa-arrow-up fa-icon"></i></a>
+
+            <% if (debug) { %>
+                <input name="file" type="file" class="form-control-file" id="image-upload" style="display: none;">
+                <a class="icon" id="icon-upload-image">
+                <i class="fa fa-upload fa-icon"></i></a>
+            <% } %>
+            <a class="icon" id="goto-home" href="/"><i class="fa fa-home fa-icon"></i></a>
+        </div>
+       
+
+        <div class="row">
+            <div class="webcam-container">
+                <video id="recorder"></video>
+                <canvas id="canvas">No Content</canvas>
+            </div>
+        </div>
+    </div>

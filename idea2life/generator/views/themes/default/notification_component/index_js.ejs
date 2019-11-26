@@ -1,0 +1,71 @@
+
+<script src="<%= base_path %>notification_component/js/toastr.min.js"></script>
+
+<% include options.ejs %>
+
+<script>
+    // toastr configuration is passed to it autiomatically
+    (function initializeToastr(options){
+        toastr.options = options;
+    })(toastr_options);
+
+
+    function toastError(msg, title=null, options={}){
+
+        if (title == null){
+            toastr.error(msg, options);
+        }
+        else{
+            toastr.error(msg, title, options);
+        }
+        
+    };
+
+
+    function toastWarning(msg, title=null, options={}){
+
+        if (title == null){
+            toastr.warning(msg, options);
+        }
+        else{
+            toastr.warning(msg, title, options);
+        }
+        
+    };
+
+    function toastSuccess(msg, title=null, options={}){
+
+        if (title == null){
+            toastr.success(msg, options);
+        }
+        else{
+            toastr.success(msg, title, options);
+        }
+        
+    };
+
+    function toastInfo(msg, title=null, options={}){
+
+        if (title == null){
+            toastr.info(msg, options);
+        }
+        else{
+            toastr.info(msg, title, options);
+        }
+        
+    };
+
+    // data = { msg: errorMsg, title: errorTitle, category: 'error' || 'warning' || 'info' || 'success', status: true | false }
+    function raiseToast(data){
+
+        if (data.category == "error"){
+            toastError(data.msg, data.title);
+        }
+
+        if (data.category == "success"){
+            toastSuccess(data.msg, data.title);
+        }
+
+
+    }
+</script>

@@ -1,0 +1,1 @@
+Download the model in this folder from here https://lion.app.box.com/file/493417810557

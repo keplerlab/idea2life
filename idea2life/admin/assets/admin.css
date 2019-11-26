@@ -1,0 +1,84 @@
+@font-face {
+    font-family: "FuturaNext_Light";
+    url("/adminassets/fonts/FuturaNext_Light.otf") format("opentype"),
+    }
+
+  h1, h2, h3, h4 {
+  font-family: 'FuturaNext_Light', Arial, sans-serif;
+  font-weight:normal;
+  font-style:normal;
+  }
+
+
+  p {
+  font-family: 'FuturaNext_Light', Arial, sans-serif;
+  font-weight:normal;
+  font-style:normal;
+  font-color:grey;
+  }
+
+
+.space{
+  height: 50px;
+}
+
+.space-sm{
+  height: 25px;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 56px;
+  background-color: #fe414d;
+  color: white;
+  text-align: center;
+}
+
+body, html { height: 90%; }
+.outer {
+  width: 1px;
+  height: 100%;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
+.inner {
+  position: absolute;
+  width:100%;
+  height: 80%;
+  background: lightgrey;
+  top: 30%;
+  
+}
+
+body, html { height: 90%; }
+.outerhorizontal {
+  width: 100%;
+  height: 1px;
+  margin: auto;
+  margin-top: 30px;
+  position: relative;
+  overflow: hidden;
+}
+.innerhorizontal {
+  position: absolute;
+  width:100%;
+  height: 80%;
+  background: lightgrey;
+}
+
+
+hr {
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+  background-color:lightgrey;
+  border-color: lightgrey;
+}

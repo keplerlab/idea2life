@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rows>
+   <row id="R_R1" width="100" offset="0">
+      <component class="Header" />
+   </row>
+   <row id="R_R2" width="100" offset="0">
+      <column id="R_R2C1" width="50" offset="0">
+         <component class="Image,Video" />
+      </column>
+      <column id="R_R2C2" width="50" offset="0">
+         <component class="Video,Image,Carousel" />
+      </column>
+   </row>
+   <row id="R_R3" width="100" offset="0">
+      <column id="R_R3C1" width="33" offset="0">
+         <row id="R_R3C1R1" width="100" offset="0">
+            <component class="Social" />
+         </row>
+         <row id="R_R3C1R2" width="100" offset="0">
+            <component class="Heading" />
+         </row>
+      </column>
+      <column id="R_R3C2" width="33" offset="0">
+         <component class="Image,Video" />
+      </column>
+      <column id="R_R3C3" width="33" offset="0">
+         <component class="Image,Video" />
+      </column>
+   </row>
+   <row id="R_R4" width="100" offset="0">
+      <component class="Carousel,Video" />
+   </row>
+</rows>
