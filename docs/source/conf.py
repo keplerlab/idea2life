@@ -15,6 +15,9 @@ import sys
 import sphinx_rtd_theme
 
 
+# -- Set start point ---------------------
+master_doc = 'index'
+
 sys.path.insert(0, os.path.abspath(os.path.join('..','..','ai')))
 
 
