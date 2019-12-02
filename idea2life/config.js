@@ -23,7 +23,7 @@ const CONFIG = {
 
     external_services: {
         ai: {
-            url: 'localhost',
+            url: 'ai',
             name: 'ai',
             port: 5000
         }

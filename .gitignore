@@ -17,6 +17,8 @@ models
 node_modules/
 ai/data/obj
 
+idea2life/public/last_page_data.json
+
 *.zip
 
 # Byte-compiled / optimized / DLL files
