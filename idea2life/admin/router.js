@@ -29,7 +29,7 @@ const componentDirectoryPath = path.join(__dirname, ADMINCONFIG.component_folder
  * 
  */
 adminRouter.get("/", function(req, res) {
-    res.render(ADMINCONFIG.view.home);
+	res.render(ADMINCONFIG.view.home);
 });
 
 adminRouter.get("/errorpage", function(req, res){
@@ -94,7 +94,6 @@ adminRouter.get("/pagehtmlview", function(req, res){
 	}
 });
 
-
 /**
  * This is a GET request - "/pagenames" used to get a selected page name.
  * 
@@ -118,9 +117,17 @@ adminRouter.get("/pagenames", function(req, res, next){
 adminRouter.get("/pageedit", function(req, res){
 		//apply check for html page only and use post in place of get to send this file name
 		const fileName = req.query.page;
-		var filePath = path.join(htmlDirectoryPath, fileName, "/", ADMINCONFIG.defaultpage.name + ADMINCONFIG.defaultpage.ext);
-		var content = fs.readFileSync(filePath);
-		res.render(ADMINCONFIG.page.edit, { content: content, fileName : fileName});
+		let filePath = path.join(htmlDirectoryPath, fileName, "/", ADMINCONFIG.defaultpage.name + ADMINCONFIG.defaultpage.ext);
+		let content = fs.readFileSync(filePath);
+
+		let useragent = req.get('User-Agent');
+		// console.log(useragent.indexOf("iPad") != -1);
+		if(useragent.indexOf("Mobile") != -1){
+			res.render(ADMINCONFIG.page.edit, { content: content, fileName : fileName, base_path: "/adminnotification/", showDeviceWarning : true});
+		}
+		else {
+			res.render(ADMINCONFIG.page.edit, { content: content, fileName : fileName, base_path: "/adminnotification/", showDeviceWarning : false});
+		}
 });
 
 /**
@@ -134,9 +141,15 @@ adminRouter.post("/savepage", function(req, res){
 		const fileName = req.query.page;
 		
 		fs.writeFile(path.join(htmlDirectoryPath, fileName , ADMINCONFIG.defaultpage.name + ADMINCONFIG.defaultpage.ext), data.data, function(err) {
-		    if(err) {
-		        return console.log(err);
-		    }
+			
+			if(err) {
+				// return console.log(err);
+
+				res.send({ msg: "Page not saved.", category: 'error', title: 'Edit:', data: null });
+			}
+			else{
+				res.send({ msg: "Page saved successfully.", category: 'success', title: 'Edit:', data: null });
+			}
 		}); 
 });
 

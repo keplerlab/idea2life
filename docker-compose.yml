@@ -5,7 +5,13 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./ai/server/static/images:/home/ai/server/static/images
+      # mount python ai code directory on docker container
+      - ./ai/:/home/ai/
+
+      # Exclude mount of lib directory as it is static compiled c++ code
+      - /home/ai/lib/
+
+      # mount idea2life and doc directory for  optionally building documentation
       - ./idea2life/:/home/idea2life/
       - ./docs/:/home/docs/
     environment:
@@ -16,8 +22,9 @@ services:
     ports:
       - "1813:1813"
     volumes:
-      - ./idea2life/public:/usr/src/app/public
-      - ./idea2life/layout/data/:/usr/src/app/layout/data
-      - ./idea2life/userData/:/usr/src/app/userData
+      - ./idea2life/:/usr/src/app/
+
+      # Exclude mount node_modules directory
+      - /usr/src/app/node_modules/
     environment:
       FLASK_ENV: development

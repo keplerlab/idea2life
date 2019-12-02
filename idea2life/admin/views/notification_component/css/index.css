@@ -1,0 +1,16 @@
+.toast-error, .toast-success{
+    background-color: white;
+}
+
+.toast-title, .toast-message{
+    color: #fe414d;
+}
+
+.toast-close-button{
+    color: #fe414d;
+}
+#toast-container > div{
+    opacity: 1;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+    filter: alpha(opacity=100);
+}

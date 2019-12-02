@@ -31,21 +31,21 @@ RUN conda install opencv flask
 RUN pip install sphinx sphinx-js sphinx-rtd-theme
 RUN npm install -g jsdoc
 
-ARG DOWNLOAD_DIR=/download/
+
 ARG PROJECT_DIR=/home/ai/
 ARG HOME_DIR=/home/
 
-RUN mkdir ${DOWNLOAD_DIR}
+RUN mkdir ${PROJECT_DIR}
 
 # clone pyyolo and darknet
-RUN mkdir ${DOWNLOAD_DIR}/lib \
+RUN mkdir ${PROJECT_DIR}/lib \
 	&& \
-    cd ${DOWNLOAD_DIR}/lib \
+    cd ${PROJECT_DIR}/lib \
     && \
     git clone --recursive https://github.com/keplerlab/pyyolo.git
 
 #COMPILE DARKNET and PYYOLO
-RUN cd ${DOWNLOAD_DIR}/lib/pyyolo \
+RUN cd ${PROJECT_DIR}/lib/pyyolo \
     &&  \
     make -j8  \
     &&  \
@@ -53,24 +53,16 @@ RUN cd ${DOWNLOAD_DIR}/lib/pyyolo \
     &&  \
     python setup.py build 
 
-COPY . ${PROJECT_DIR}
-
-RUN rm -rf ${PROJECT_DIR}/lib
-RUN mv ${DOWNLOAD_DIR}/lib ${PROJECT_DIR}
 
 #Install PYYOLO
 RUN cd ${PROJECT_DIR}/lib/pyyolo \
     &&  \
     python setup.py install    
  
-RUN cd ${PROJECT_DIR}/ \
-    && \
-    cp cfg/yolo-obj.cfg lib/pyyolo/darknet/cfg/ \
-    && \
-    cp data/obj.names lib/pyyolo/darknet/data/
-
+COPY cfg/yolo-obj.cfg ${PROJECT_DIR}/lib/pyyolo/darknet/cfg/
+COPY data/obj.names ${PROJECT_DIR}/lib/pyyolo/darknet/data/
 
 WORKDIR ${PROJECT_DIR}
 ENV FLASK_APP server/app.py
 ENV FLASK_RUN_HOST 0.0.0.0
-CMD ["flask", "run"]
+CMD ["flask","run"]

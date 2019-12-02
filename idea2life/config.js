@@ -23,7 +23,7 @@ const CONFIG = {
 
     external_services: {
         ai: {
-            url: 'ai',
+            url: 'localhost',
             name: 'ai',
             port: 5000
         }
@@ -56,6 +56,7 @@ const CONFIG = {
             themes: 'generator/views/themes',
             userdata : 'userData',
             adminassets : '/admin/assets',
+            adminnotification: '/admin/views/',        
         }
    },
 

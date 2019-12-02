@@ -17,6 +17,7 @@ from pathlib import Path
 import config
 import template_detect.utils as utils
 
+
 # TODO add abstraction for referring bounding box co-ordinates e.g. LEFT = "left"
 
 
@@ -36,7 +37,6 @@ class TemplateDetect(object):
         """
         C = config.Config()
         x = str(os.path.realpath(Path(__file__).parent)).split("/")
-        print("x jere", *x[:-1])
 
         weightfile_templates = os.path.join("/", *x[:-1], C.WEIGHTFILE_TEMPLATES)
         self.thresh = C.THRESH
@@ -44,7 +44,6 @@ class TemplateDetect(object):
 
         # initialize pyyolo
         darknet_path = os.path.join("/", *x[:-1], C.DARKNET_PATH)
-        print("darknet path", darknet_path)
         datacfg = os.path.join("/", *x[:-1], C.DATACFG)
         cfgfile = os.path.join("/", *x[:-1], C.CFGFILE)
         pyyolo.init(darknet_path, datacfg, cfgfile, weightfile_templates)
@@ -172,16 +171,11 @@ class TemplateDetect(object):
         if itemA["top"] > itemB["bottom"] or itemB["top"] > itemA["bottom"]:
             return False
 
-        print(" itemA " + itemA["class"])
-        print(" itemB " + itemB["class"])
-
         widthDiff = 0
         heightDiff = 0
         margin = 2
         if itemA["left"] < itemB["left"]:
             if itemA["right"] < itemB["right"]:
-                print(itemA["right"])
-                print(itemB["left"])
                 widthDiff = itemA["right"] - itemB["left"] + margin
             else:
                 print("warning: possible iou overlap")
@@ -199,11 +193,9 @@ class TemplateDetect(object):
         else:
             if itemB["bottom"] < itemA["bottom"]:
                 heightDiff = itemB["bottom"] - itemA["top"] + margin
-                print("heightDiff: E ", heightDiff)
             else:
                 print("warning: possible iou overlap")
 
-        print("WIDTH_DIFF: " + str(widthDiff) + " HEIGHT_DIFF: " + str(heightDiff))
         if (
             widthDiff > 0 and heightDiff > 0 and widthDiff < heightDiff
         ) or heightDiff == 0:
@@ -232,6 +224,26 @@ class TemplateDetect(object):
                     print("warning: possible iou overlap")
         return True
 
+    def _save_file_on_disk(self, image, out_dir):
+        """Private function saving image to output directory folder on
+        disk
+
+        :param object: base class inheritance
+        :type object: class:`Object`
+        :param image: input image file
+        :type image: input_image binary
+        :param out_dir: directory path where files needs to be saved
+        :type out_dir: str
+        """
+        if not os.path.exists(out_dir):
+            os.makedirs(out_dir)
+
+        input_file_name = os.path.join(out_dir, utils.generate_filename() + ".png")
+
+        with open(input_file_name, "wb") as f:
+            f.write(image)
+            return input_file_name
+
     def predict(self, image_base64, out_dir):
         """Public function for performing template detection on 
         input base64 image, This function uses pyyolo api for calling
@@ -246,48 +258,37 @@ class TemplateDetect(object):
         :type out_dir: string
         :return: outputs , w , h (dictionary containing bounding box of detected templates, input image width input image height)
         :rtype: dictionary, int , int
-
         """
         # Save base64 string as image
-
         image = utils.base64_to_image(image_base64)
-
-        # TODO: MAKE FUNCTION save file on disk
-        if not os.path.exists(out_dir):
-            os.makedirs(out_dir)
-
-        fn_input = os.path.join(out_dir, utils.generate_filename() + ".png")
-        with open(fn_input, "wb") as f:
-            f.write(image)
-        # TODO END
+        input_image_name = self._save_file_on_disk(image, out_dir)
 
         # Load image
-        src = cv2.imread(fn_input)
+        input_image = cv2.imread(input_image_name)
 
         # Preprocess image
-        img = src.transpose(2, 0, 1)
+        img = input_image.transpose(2, 0, 1)
         c, h, w = img.shape[0], img.shape[1], img.shape[2]
         data = img.ravel() / 255.0
         data = np.ascontiguousarray(data, dtype=np.float32)
 
         # Detect elements
-        outputs = pyyolo.detect(w, h, c, data, self.thresh, self.hier_thresh)
-
-        # TODO: REMOVE REPEATED CODE.
-        for i, item in enumerate(outputs):
-            for j in range(i + 1, len(outputs), 1):
-                print(self.check_N_fix_overlap(item, outputs[j]))
+        components_detection_list = pyyolo.detect(
+            w, h, c, data, self.thresh, self.hier_thresh
+        )
 
         # Draw bboxes
-        # TODO MAKE SEPARATE FUNCTION for draw bounding box and save
-        output = utils.draw_bboxes(src, outputs)
-        fn_output = os.path.splitext(os.path.basename(fn_input))[0] + "_out.png"
-        fn_output = os.path.join(out_dir, fn_output)
+        output_image = utils.draw_bboxes(input_image, components_detection_list)
 
-        cv2.imwrite(fn_output, output)
-        print("Results saved as", fn_output)
+        # Save output image
+        output_image_name = (
+            os.path.splitext(os.path.basename(input_image_name))[0] + "_out.png"
+        )
+        output_image_name = os.path.join(out_dir, output_image_name)
+        cv2.imwrite(output_image_name, output_image)
+        print("Results saved as", output_image_name)
 
-        return outputs, w, h
+        return components_detection_list, w, h
 
     def __del__(self):
         """ Class destructor used for Clean up pyyolo object detector

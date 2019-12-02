@@ -6,9 +6,12 @@
 <body>
 
   <% include partials/header_component %>
+<script>
 
+
+</script>
   <div class="container">
-    <div class="row">
+    <div class="row text-center align-items-center">
       <h2>Page List<h2>
     </div>
 
@@ -17,35 +20,47 @@
                   <table id="pageview" class="table table-striped">
                     <thead>
                       <tr>
-                        <th>Page Name</th>
+                        <th>
+                            <% if(pagelist.length > 0) { %>
+                              Page Name
+                            <% } %>  
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
-                       <% pagelist.forEach((page) => { %>
-                            <tr>
-                              <td><%= page %></td>
-                              <td>
-                                <a href="<%= pagefeatures.edit %>?page=<%= page %>" target="_blank">
-                                  Edit
-                                </a>
-                              </td>
-                              <td>
-                                <a href="<%= pagefeatures.pageview %>?page=<%= page %>" target="_blank">
-                                  View 
-                                </a>
-                              </td>
-                              <td>
-                                <a id="<%= page %>" class="pagerlink" href="#myModal" data-toggle="modal" >
-                                  Rename 
-                                </a>
-                              </td>
-                              <td>
-                                <a href="<%= pagefeatures.delete %>?page=<%= page %>" >
-                                  Delete 
-                                </a>
-                              </td>
-                            </tr>
-                        <% }) %>  
+                       <% if(pagelist.length > 0) {
+                                    pagelist.forEach((page) => { %>
+                                      <tr>
+                                        <td><%= page %></td>
+                                        <td>
+                                          <a href="<%= pagefeatures.edit %>?page=<%= page %>" target="_blank">
+                                            Edit
+                                          </a>
+                                        </td>
+                                        <td>
+                                          <a href="<%= pagefeatures.pageview %>?page=<%= page %>" target="_blank">
+                                            View 
+                                          </a>
+                                        </td>
+                                        <td>
+                                          <a id="<%= page %>" class="pagerlink" href="#myModal" data-toggle="modal" >
+                                            Rename 
+                                          </a>
+                                        </td>
+                                        <td>
+                                          <a href="<%= pagefeatures.delete %>?page=<%= page %>" >
+                                            Delete 
+                                          </a>
+                                        </td>
+                                      </tr>
+                                  <% }) 
+                              }   else { %>  
+                                <tr>
+                                    <td>No Records Found!</td>
+                                    </tr>
+                                
+                                <% }     
+                        %>  
                       
                     </tbody>
                   </table>

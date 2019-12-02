@@ -24,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '150mb' }));
 app.use(bodyParser.json({ limit: '150mb' }));
 
 // static files should be inside public folder
+app.use('/adminnotification',express.static(path.join(__dirname , CONFIG.server.path_for_static.adminnotification)));    
 app.use('/adminassets',express.static(path.join(__dirname , CONFIG.server.path_for_static.adminassets)));
 app.use('/static_theme', express.static(path.join(__dirname, CONFIG.server.path_for_static.themes)));
 app.use('/static_page', express.static(path.join(__dirname, CONFIG.server.path_for_static.userdata)));
