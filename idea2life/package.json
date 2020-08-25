@@ -25,7 +25,7 @@
     "replace-in-file": "^4.2.0",
     "request": "^2.88.0",
     "rimraf": "^3.0.0",
-    "tinymce": "^5.4.0",
+    "tinymce": "^5.4.1",
     "tree-model": "^1.0.7",
     "xml2js": "^0.4.22"
   }
