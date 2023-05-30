@@ -10,6 +10,7 @@ RUN  apt-get update && apt-get install -y --no-install-recommends \
     git \
     curl \
     software-properties-common \
+    libgl1 \
 	make 
 
 RUN  curl -sL https://deb.nodesource.com/setup_12.x | bash - \
