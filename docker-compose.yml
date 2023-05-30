@@ -1,7 +1,8 @@
 version: '3'
 services:
   ai:
-    build: ./ai/
+    platform: linux/x86_64
+    build: ./ai/      
     ports:
       - "5000:5000"
     volumes:
@@ -16,8 +17,10 @@ services:
       - ./docs/:/home/docs/
     environment:
       FLASK_ENV: development
+      PYTHONUNBUFFERED: 1
 
   idea2life:
+    platform: linux/x86_64
     build: ./idea2life/
     ports:
       - "1813:1813"

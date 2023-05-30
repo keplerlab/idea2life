@@ -30,7 +30,7 @@ function sendImageToAIService(res, imageBase64, filename, callback){
         method: 'POST',
         url: 'http://' + CONFIG.external_services.ai.url + ':' + CONFIG.external_services.ai.port + '/svc',
         json: requestData,
-        timeout: 15 * 1000,
+        timeout: 300 * 1000,
         encoding: null
     }, (err, response, body) => {
         
