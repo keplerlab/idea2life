@@ -10,7 +10,8 @@ RUN  apt-get update && apt-get install -y --no-install-recommends \
     git \
     curl \
     software-properties-common \
-	make 
+	make \
+    libgl1-mesa-glx
 
 RUN  curl -sL https://deb.nodesource.com/setup_12.x | bash - \
     && \
