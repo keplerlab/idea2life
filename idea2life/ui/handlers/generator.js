@@ -29,7 +29,7 @@ function sendXMLToGeneratorService(res, data, callback){
         agentOptions: {
             rejectUnauthorized: false
         },
-        timeout: 15 * 1000
+        timeout: 100 * 1000
     }, (err, response, body) => {
         
         if (err) {
